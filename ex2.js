@@ -15,19 +15,35 @@
  */
 
 class Pokemon {
-    constructor(id, nombre, tipos, vida, ataque, defensa){
+    constructor(id, name, type, hp, attack, defense){
         this.id = id
-        this.nombre = nombre
-        this.tipos = tipos
-        this.vida = vida
-        this.ataque = ataque
-        this.defensa = defensa
+        this.name = name
+        this.type = type
+        this.hp = hp
+        this.attack = attack
+        this.defense = defense
+    }
+    fight(pokemonToAttack){
+
+        const atkPokemon = Math.floor(Math.random() * this.attack)
+        const defPokemon = Math.floor(Math.random() * pokemonToAttack.defense)
+        console.log(`${this.name} ataca a ${pokemonToAttack.name}`)
+        console.log(`${this.name} ataca con ${atkPokemon} puntos de daño.`)
+        console.log(`${pokemonToAttack.name} consigue una defensa de ${defPokemon} puntos.`)
+        const damage = atkPokemon - defPokemon
+        console.log(atkPokemon >= defPokemon ? `${this.name} asesta ${damage} puntos de daño.` : `${this.name} ha fallado el ataque.`)
+
+        // Si he conseguido asestar un golpe, debo restar los puntos de daño al hp del pokemon atacado
+        damage > 0 ? pokemonToAttack.hp = pokemonToAttack.hp - damage : pokemonToAttack.hp
+
+        console.log(`La salud de ${pokemonToAttack.name} es ahora de ${pokemonToAttack.hp}`)
     }
 }
-
 let bulbasaur = new Pokemon(1, "Bulbasaur", ['Grass', 'Poison'], 45, 49, 49)
 let squirtle = new Pokemon(1, "Squirtle", ['Water'], 44, 48, 65)
 
-// bulbasaur.atacar(squirtle)
+console.log(bulbasaur, squirtle)
+
+bulbasaur.fight(squirtle)
 
 
